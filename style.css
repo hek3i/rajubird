@@ -7,3 +7,30 @@
     padding: auto;
     
 }
+
+body{
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    background-color: bisque;
+}
+
+footer{
+    margin-top: 100px;
+    text-align: center;
+    
+}
+
+.credit{
+    font-weight: 900;
+    color: chocolate;
+}
+
+.fork{
+    font-size: small;
+    color: rgb(138, 104, 19);
+}
+
+h2{
+    text-align: center;
+    text-shadow:30px;
+    color:brown;
+}
