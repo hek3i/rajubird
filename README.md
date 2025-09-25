@@ -1,4 +1,4 @@
 # Raju Bird
-Remake of the Original FlappyBird Using **JS** &amp; **HTML Canvas** 
+Remake of the Original FlappyBird Using **JS** &amp; **HTML Canvas** feat Pritviraj
 # [Play it.](https://hek3i.github.io/rajubird/)
 
