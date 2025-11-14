@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>RajuBird - hek3i</title>
 
 <style>
@@ -19,100 +19,49 @@
         flex-direction: column;
         align-items: center;
         padding: 20px;
+        text-align: center;
+        transition: background 0.4s, color 0.3s;
+    }
+
+    /* DARK MODE */
+    body.dark {
+        background: linear-gradient(180deg, #111, #1d1d1d);
+        color: white;
+    }
+
+    h2 {
+        font-size: 42px;
+        letter-spacing: 2px;
+        color: #222;
+        text-shadow: 2px 2px 0px #fff;
+        margin-bottom: 15px;
         transition: 0.3s;
     }
 
-    body.dark {
-        background: linear-gradient(180deg, #111, #222);
-        color: white;
+    body.dark h2 {
+        text-shadow: none;
+        color: #f2f2f2;
     }
 
-    /* Loading screen */
-    #loader {
-        position: fixed;
-        inset: 0;
-        background: #000000aa;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: white;
-        font-size: 30px;
-        z-index: 999;
-        backdrop-filter: blur(3px);
-        animation: fadeOut 0.7s ease forwards;
-        animation-delay: 1.3s;
-    }
-
-    @keyframes fadeOut {
-        to { opacity: 0; visibility: hidden; }
-    }
-
-    /* Header */
-    .header {
-        text-align: center;
-        margin-bottom: 15px;
-    }
-
-    .title {
-        font-size: 42px;
-        letter-spacing: 2px;
-        text-shadow: 2px 2px 0px #fff;
-    }
-
-    /* Buttons */
-    .btn {
-        margin: 5px;
-        background: #008cff;
-        padding: 8px 16px;
-        border: none;
-        font-size: 20px;
-        border-radius: 10px;
-        cursor: pointer;
-        color: white;
-        transition: 0.2s;
-    }
-
-    .btn:hover {
-        transform: scale(1.05);
-    }
-
-    /* Dark-mode button */
+    /* Dark Mode Button */
     #darkToggle {
-        background: #333;
+        position: fixed;
+        top: 15px;
+        right: 15px;
+        background: #222;
+        color: white;
+        padding: 8px 16px;
+        border-radius: 10px;
+        border: none;
+        cursor: pointer;
+        font-size: 18px;
+        transition: 0.2s;
+        z-index: 999;
     }
 
     body.dark #darkToggle {
         background: #f8b400;
-        color: black;
-    }
-
-    /* Bird selector */
-    .selector-box {
-        margin: 10px 0;
-        display: flex;
-        gap: 15px;
-        justify-content: center;
-    }
-
-    .bird-option {
-        padding: 8px 14px;
-        border: 2px solid #000;
-        background: white;
-        cursor: pointer;
-        border-radius: 10px;
-        transition: 0.2s;
-    }
-
-    .bird-option.active {
-        background: #ffe100;
-        transform: scale(1.1);
-    }
-
-    /* Canvas container */
-    .game-container {
-        display: flex;
-        justify-content: center;
-        width: 100%;
+        color: #000;
     }
 
     canvas {
@@ -120,40 +69,16 @@
         border: 3px solid #000;
         border-radius: 14px;
         max-width: 100%;
+        height: auto;
+        transition: 0.3s;
     }
 
-    /* Scoreboard UI */
-    .scoreboard {
-        margin-top: 10px;
-        font-size: 26px;
-        background: #ffffff80;
-        padding: 5px 15px;
-        border-radius: 8px;
-        border: 2px solid #000;
-    }
-
-    /* Mobile jump */
-    .mobile-controls {
-        margin-top: 18px;
-        display: none;
-    }
-
-    #jumpBtn {
-        padding: 12px 30px;
-        background: #ffbf00;
-        font-size: 24px;
-        border: none;
-        border-radius: 50px;
-        cursor: pointer;
-    }
-
-    @media (max-width: 768px) {
-        .mobile-controls { display: flex; }
+    body.dark canvas {
+        border-color: white;
     }
 
     footer {
-        margin-top: 20px;
-        text-align: center;
+        margin-top: 25px;
         font-size: 14px;
     }
 
@@ -166,80 +91,27 @@
 
 <body>
 
-<div id="loader">Loading...</div>
+<button id="darkToggle">Dark Mode</button>
 
-<header class="header">
-    <h1 class="title">RAJU BIRD</h1>
+<h2>RAJU BIRD</h2>
 
-    <button class="btn" id="startBtn">Start</button>
-    <button class="btn" id="pauseBtn">Pause</button>
-    <button class="btn" id="restartBtn">Restart</button>
-    <button class="btn" id="darkToggle">Dark Mode</button>
-</header>
-
-<!-- Bird selector -->
-<div class="selector-box">
-    <div class="bird-option active" data-bird="yellow">Yellow Bird</div>
-    <div class="bird-option" data-bird="blue">Blue Bird</div>
-    <div class="bird-option" data-bird="red">Red Bird</div>
-</div>
-
-<div class="game-container">
-    <canvas id="canvas" width="320" height="550"></canvas>
-</div>
-
-<div class="scoreboard">Score: <span id="score">0</span></div>
-
-<!-- Mobile -->
-<div class="mobile-controls">
-    <button id="jumpBtn">JUMP</button>
-</div>
+<!-- EXACT size needed for game.js physics -->
+<canvas id="canvas" width="276" height="550"></canvas>
 
 <footer>
     <p class="credit">made by <a href="https://instagram.com/hek3i">hek3i</a></p>
     <p class="fork">fork of <a href="https://github.com/aaarafat/JS-Flappy-Bird">aaarafat/JS-Flappy-Bird</a></p>
 </footer>
 
-<!-- Your original game -->
 <script src="game.js"></script>
 
 <script>
-/* Do NOT change game.js — we wrap UI around it */
+    // DARK MODE TOGGLE
+    const toggle = document.getElementById("darkToggle");
 
-/* START button */
-document.getElementById("startBtn").onclick = () => {
-    if (typeof startGame === "function") startGame();
-};
-
-/* PAUSE */
-document.getElementById("pauseBtn").onclick = () => {
-    if (typeof pauseGame === "function") pauseGame();
-};
-
-/* RESTART */
-document.getElementById("restartBtn").onclick = () => {
-    if (typeof restartGame === "function") restartGame();
-};
-
-/* Mobile jump */
-document.getElementById("jumpBtn").onclick = () => {
-    if (typeof jump === "function") jump();
-};
-
-/* Bird selector UI (just UI highlight — use this in game.js if needed) */
-document.querySelectorAll(".bird-option").forEach(btn => {
-    btn.onclick = () => {
-        document.querySelectorAll(".bird-option").forEach(x => x.classList.remove("active"));
-        btn.classList.add("active");
-
-        // setSelectedBird(btn.dataset.bird)  <-- optional if game.js supports this
-    };
-});
-
-/* Dark mode */
-document.getElementById("darkToggle").onclick = () => {
-    document.body.classList.toggle("dark");
-};
+    toggle.addEventListener("click", () => {
+        document.body.classList.toggle("dark");
+    });
 </script>
 
 </body>
